@@ -24,9 +24,9 @@ task :prepare_sandbox do
   Dir.chdir("cookbooks/dcb_test")
   files = %w{*.md *.rb attributes definitions files libraries providers recipes resources templates}
 
-  rm_rf sandbox
-  mkdir_p sandbox
-  cp_r Dir.glob("{#{files.join(',')}}"), sandbox
+  rm_rf sandbox_path
+  mkdir_p sandbox_path
+  cp_r Dir.glob("{#{files.join(',')}}"), sandbox_path
   puts "\n\n"
 end
 
