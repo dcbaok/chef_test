@@ -21,6 +21,7 @@ def prepare_foodcritic_sandbox(sandbox)
 
   rm_rf sandbox
   mkdir_p sandbox
-  cp_r Dir.glob("{#{files.join(',')}}"), sandbox
+  Dir.chdir("cookbooks")
+  cp_r Dir.glob("{#{files.join(',')}}"), ../sandbox
   puts "\n\n"
 end
