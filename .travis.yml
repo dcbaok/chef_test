@@ -3,4 +3,6 @@ gemfile:
   - test/support/Gemfile
 rvm:
   - 2.1.0
-script: bundle exec rake foodcritic
+script:
+  - bundle exec rake knife
+  - bundle exec rake foodcritic
