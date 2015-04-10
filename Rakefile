@@ -17,11 +17,11 @@ task :default => 'foodcritic'
 private
 
 def prepare_foodcritic_sandbox(sandbox)
+  Dir.chdir("cookbooks/dcb_test")
   files = %w{*.md *.rb attributes definitions files libraries providers recipes resources templates}
 
   rm_rf sandbox
   mkdir_p sandbox
-  Dir.chdir("cookbooks")
   cp_r Dir.glob("{#{files.join(',')}}"), sandbox
   puts "\n\n"
 end
