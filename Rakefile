@@ -5,7 +5,7 @@ task :default => 'foodcritic'
 desc "Runs foodcritic linter"
 task :foodcritic do
   if Gem::Version.new("2.1.0") <= Gem::Version.new(RUBY_VERSION.dup)
-    sh "foodcritic -f any cookbooks" 
+    sh "foodcritic -f any cookbooks/dcb_test" 
   else
     puts "WARN: foodcritic run is skipped as Ruby #{RUBY_VERSION} is < 2.1.0"
   end
