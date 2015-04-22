@@ -1,8 +1,12 @@
+# Travis config for Chef testing
 language: ruby
 gemfile:
   - test/support/Gemfile
+
+# specify ruby version to run this under (is this necessary?)
 rvm:
   - 2.1.0
+
 script:
   - bundle exec rake knife
   - bundle exec rake foodcritic
