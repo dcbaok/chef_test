@@ -1,5 +1,5 @@
 name             'dcb_test'
-maintainer	 'TpT'
+maintainer	 'David Berner'
 maintainer_email 'dcbaok@tensqft.net'
 license          'All rights reserved'
 description      'Installs/Configures dcb_test'
