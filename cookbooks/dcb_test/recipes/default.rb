@@ -10,4 +10,3 @@
 package "flawed" do
    action :nothing
 end
-end
