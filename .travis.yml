@@ -10,3 +10,6 @@ rvm:
 script:
   - bundle exec rake foodcritic
   - bundle exec rake knife
+
+after_success:
+  "echo hi"
