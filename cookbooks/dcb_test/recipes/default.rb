@@ -7,6 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-package "stub" do
+package "testing" do
    action :nothing
 end
