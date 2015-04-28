@@ -7,6 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-package "flawed" do
+package "stub" do
    action :nothing
 end
