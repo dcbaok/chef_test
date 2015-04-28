@@ -17,6 +17,6 @@ task :knife do
 end
 
 desc "Deploy to Chef server"
-task :knife do
+task :deploy do
   sh "bundle exec knife cookbook upload dcb_test -c .chef/knife.rb"
 end
