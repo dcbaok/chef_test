@@ -1,4 +1,10 @@
 # Travis config for Chef testing
+env:
+  global:
+    - OPSCODE_USER=$OPSCODE_USER
+    - ORGNAME=$ORGNAME
+  - secure: "RFUp40w8eSgXkQ2bKSC2jUhEz6hkDrOiv9fIS9Xn6I3bqDu1wVAe2acgDcNw/ALzprqE9RD1drznimA1iz3dAWPs48qAkYtzLwZ+ILkDM0wGOa9w/WSTO77AC2Q75ihemurs3ePYYowh1lM/v83ubc0Lnv+dZ6QHj7sjFPfcR7Q="
+
 language: ruby
 gemfile:
   - test/support/Gemfile
@@ -11,5 +17,8 @@ script:
   - bundle exec rake foodcritic
   - bundle exec rake knife
 
-after_success:
-  "echo hi"
+after_success: 
+  - if [ $TRAVIS_BRANCH == 'master' ] ; then
+        openssl aes-256-cbc -k "$chef_validator_pw" -in .chef/chef_validator_pem.enc -out .chef/$ORGNAME-validator.pem -d
+        bundle exec rake deploy;
+    fi
