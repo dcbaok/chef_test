@@ -1,13 +1,13 @@
 # Travis config for Chef testing
-env:
-  global:
-    - OPSCODE_USER=$OPSCODE_USER
-    - ORGNAME=$ORGNAME
-    - secure: "RFUp40w8eSgXkQ2bKSC2jUhEz6hkDrOiv9fIS9Xn6I3bqDu1wVAe2acgDcNw/ALzprqE9RD1drznimA1iz3dAWPs48qAkYtzLwZ+ILkDM0wGOa9w/WSTO77AC2Q75ihemurs3ePYYowh1lM/v83ubc0Lnv+dZ6QHj7sjFPfcR7Q="
 
 language: ruby
 gemfile:
   - test/support/Gemfile
+
+env:
+  global:
+    - ORGNAME=tensqft
+    - secure: "ackARWVgvFzdMeY5Hp1iVZW0OWl2Lh2iUnNbLnT/XRLPZz6/Y/ecnCtJrKRVVUtXr0O2YkIvPUc6f8h+z3sHOkMi3sLHLg9Hf35Tuy4+Gp5t71X3pA1lIoy/yXBPcxvud/FeIHPNV1A2sJDFzMzSPyu0tCIoImX5HR6c5p+GPXA="
 
 # specify ruby version to run this under (is this necessary?)
 rvm:
