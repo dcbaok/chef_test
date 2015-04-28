@@ -19,6 +19,6 @@ script:
 
 after_success: 
   - if [ $TRAVIS_BRANCH == 'master' ] ; then
-        openssl aes-256-cbc -k "$chef_validator_pw" -in .chef/chef_validator_pem.enc -out .chef/$ORGNAME-validator.pem -d
-        bundle exec rake deploy;
+        openssl aes-256-cbc -k "$chef_validator_pw" -in .chef/chef_validator_pem.enc -out .chef/$ORGNAME-validator.pem -d ;
+        bundle exec rake deploy ;
     fi
