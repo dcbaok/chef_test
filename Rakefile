@@ -13,5 +13,10 @@ end
 
 desc "Runs knife cookbook test"
 task :knife do
-  sh "bundle exec knife cookbook test dcb_test -c test/.chef/knife.rb -o cookbooks"
+  sh "bundle exec knife cookbook test dcb_test -c test/chef/knife.rb -o cookbooks"
+end
+
+desc "Deploy to Chef server"
+task :deploy do
+  sh "bundle exec knife cookbook upload dcb_test -c .chef/knife.rb"
 end
