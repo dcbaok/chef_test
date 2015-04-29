@@ -6,7 +6,7 @@ gemfile:
 
 env:
   global:
-    - OPSCODE_USER=foo
+    - OPSCODE_USER=tpt-travis
     - ORGNAME=tensqft
     - secure: "ackARWVgvFzdMeY5Hp1iVZW0OWl2Lh2iUnNbLnT/XRLPZz6/Y/ecnCtJrKRVVUtXr0O2YkIvPUc6f8h+z3sHOkMi3sLHLg9Hf35Tuy4+Gp5t71X3pA1lIoy/yXBPcxvud/FeIHPNV1A2sJDFzMzSPyu0tCIoImX5HR6c5p+GPXA="
 
