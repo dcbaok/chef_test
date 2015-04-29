@@ -6,6 +6,7 @@ gemfile:
 
 env:
   global:
+    - OPSCODE_USER=tpt-travis
     - ORGNAME=tensqft
     - secure: "ackARWVgvFzdMeY5Hp1iVZW0OWl2Lh2iUnNbLnT/XRLPZz6/Y/ecnCtJrKRVVUtXr0O2YkIvPUc6f8h+z3sHOkMi3sLHLg9Hf35Tuy4+Gp5t71X3pA1lIoy/yXBPcxvud/FeIHPNV1A2sJDFzMzSPyu0tCIoImX5HR6c5p+GPXA="
 
@@ -19,6 +20,7 @@ script:
 
 after_success: 
   - if [ $TRAVIS_BRANCH == 'master' ] ; then
+        openssl aes-256-cbc -k "$chef_validator_pw" -in .chef/tpt_travis_pem.enc -out .chef/$OPSCODE_USER.pem -d ;
         openssl aes-256-cbc -k "$chef_validator_pw" -in .chef/chef_validator_pem.enc -out .chef/$ORGNAME-validator.pem -d ;
         bundle exec rake deploy ;
     fi
