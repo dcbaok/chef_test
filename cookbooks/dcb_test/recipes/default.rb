@@ -15,3 +15,7 @@ end
 package "testing2" do
    action :nothing
 end
+
+package "testing3" do
+   action :nothing
+end
