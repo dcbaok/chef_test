@@ -1,9 +1,7 @@
 dcb_test Cookbook
 =================
-TODO: Enter the cookbook description here.
+Test cookbook for dcb.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
 
 Requirements
 ------------
