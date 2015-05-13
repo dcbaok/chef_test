@@ -1,7 +1,6 @@
 dcb_test Cookbook
 =================
-Test cookbook for dcb.
-
+Test cookbook so I don't break prod
 
 Requirements
 ------------
