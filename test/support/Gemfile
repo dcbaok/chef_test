@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
+# gems needed for travis integration
 gem 'rake'
 gem 'foodcritic'
 gem 'chef', '~> 12.0.2'
-gem 'moneta', '~> 0.6.0'
+gem 'moneta', '~> 0.6.0' # pin moneta at 0.6.0

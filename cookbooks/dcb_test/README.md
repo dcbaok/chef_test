@@ -1,9 +1,6 @@
 dcb_test Cookbook
 =================
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+Test cookbook so I don't break prod
 
 Requirements
 ------------

@@ -2,6 +2,7 @@
 
 task :default => 'foodcritic'
 
+# comment
 desc "Runs foodcritic linter"
 task :foodcritic do
   if Gem::Version.new("2.1.0") <= Gem::Version.new(RUBY_VERSION.dup)
@@ -11,11 +12,13 @@ task :foodcritic do
   end
 end
 
+# comment
 desc "Runs knife cookbook test"
 task :knife do
   sh "bundle exec knife cookbook test dcb_test -c test/chef/knife.rb -o cookbooks"
 end
 
+# another comment
 desc "Deploy to Chef server"
 task :deploy do
   sh "bundle exec knife cookbook upload dcb_test -c .chef/knife.rb"
