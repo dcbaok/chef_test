@@ -12,7 +12,7 @@ if [ "$TRAVIS_BRANCH" == 'master' ] ; then
 
   # place org validator pem key for chef.io
   echo "Placing org validator PEM"
-  openssl aes-256-cbc -pass env:chef_validator_pw -in $CHEFDIR/$ORGNAME.pem.enc -out $CHEFDIR/$ORGNAME-validator.pem -d ;
+  openssl aes-256-cbc -pass env:chef_validator_pw -in $CHEFDIR/chef_validator.pem.enc -out $CHEFDIR/$ORGNAME-validator.pem -d ;
 
   bundle exec rake deploy ;
 fi
