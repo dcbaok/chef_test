@@ -3,7 +3,8 @@
 # Called in .travis.yml, decrypts chef.io credentials and runs deploy to
 #   upload cookbooks to the Chef server.
 echo "Running deploy step"
-if [ "$TRAVIS_BRANCH" == 'master' ] ; then
+if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]
+then
   echo "master branch detected, proceeding with deploy"
 
   # place user pem key for chef.io
