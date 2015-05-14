@@ -10,6 +10,8 @@ env:
     - ORGNAME=tensqft
     - CHEFDIR=test/chef
     - secure: "ackARWVgvFzdMeY5Hp1iVZW0OWl2Lh2iUnNbLnT/XRLPZz6/Y/ecnCtJrKRVVUtXr0O2YkIvPUc6f8h+z3sHOkMi3sLHLg9Hf35Tuy4+Gp5t71X3pA1lIoy/yXBPcxvud/FeIHPNV1A2sJDFzMzSPyu0tCIoImX5HR6c5p+GPXA="
+    - secure: "VcKoGCHrmOQ8sIGQ1CUkK+rok+In6Z2WMQ4S4V0f8z1Q34taRpVFu5v0D6i36NZYnqRT5wZGh8U8ciSgV4Eb7O9tQFwJBrwJoFzt70+DBE2e2BqMzBrrqf6FDkrgr7BfbhmBF9C1pB0TajAMGZhKPtbP/ogf7ZAm/UxaZqhiDro="
+
 
 # specify ruby version to run this under
 # make sure this is consistent with the ruby version in the Gemfile
