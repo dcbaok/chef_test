@@ -22,4 +22,4 @@ script:
 
 # figure out how to clean this up
 after_success: 
-  - test/support/manage_deploy.sh
+  - bash test/support/manage_deploy.sh
