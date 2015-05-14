@@ -21,7 +21,7 @@ end
 # comment
 desc "Deploy to Chef server"
 task :deploy do
-  sh "bundle exec knife cookbook upload dcb_test -c .chef/knife.rb"
+  sh "bundle exec knife cookbook upload dcb_test -c test/chef/knife.rb -o cookbooks"
 end
 
 # todo : figure out loops
