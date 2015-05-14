@@ -8,14 +8,8 @@
 #
 
 # this is a disappointingly useless recipe
-package "testing" do
+%w{testing testing2 testing3 testing4}.each do |pkg|
+  package pkg do 
    action :nothing
-end
-
-package "testing2" do
-   action :nothing
-end
-
-package "testing3" do
-   action :nothing
+  end
 end
