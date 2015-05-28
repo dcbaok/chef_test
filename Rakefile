@@ -14,11 +14,10 @@ pipeline = [
 
 desc "Runs foodcritic linter on cookbooks"
 task :foodcritic do
-  success = true
   critiques.each do |cookbook|
-    system "foodcritic -f any cookbooks/#{cookbook}" || success = false
+    ret = system "foodcritic -f any cookbooks/#{cookbook}"
   end
-  success
+  ret
 end
 
 # comment
