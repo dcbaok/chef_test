@@ -4,18 +4,20 @@ task default: 'foodcritic'
 
 critiques = [
   "dcb_test",
-  "dcb_test"
+  "dcb_test2",
+  "dcb_test3"
 ]
 
 pipeline = [
   "dcb_test",
-  "dcb_test"
+  "dcb_test2",
+  "dcb_test3"
 ]
 
 desc "Runs foodcritic linter on cookbooks"
 task :foodcritic do
   critiques.each do |cookbook|
-    sh "foodcritic -f any cookbooks/#{cookbook}"
+    system "foodcritic -f any cookbooks/#{cookbook}" || return false
   end
 end
 
