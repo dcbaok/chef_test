@@ -17,7 +17,7 @@ pipeline = [
 desc "Runs foodcritic linter on cookbooks"
 task :foodcritic do
   critiques.each do |cookbook|
-    system "foodcritic -f any cookbooks/#{cookbook}" || return false
+    sh "foodcritic -f any cookbooks/#{cookbook}" 
   end
 end
 
