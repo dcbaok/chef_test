@@ -1,27 +1,34 @@
 #!/opt/chefdk/embedded/bin/rake
 
-task :default => 'foodcritic'
+task default: 'foodcritic'
 
-# comment
-desc "Runs foodcritic linter"
+critiques = [
+  "dcb_test"
+]
+
+pipeline = [
+  "dcb_test"
+]
+
+desc "Runs foodcritic linter on cookbooks"
 task :foodcritic do
-  if Gem::Version.new("2.1.0") <= Gem::Version.new(RUBY_VERSION.dup)
-    sh "foodcritic -f any cookbooks/dcb_test" 
-  else
-    puts "WARN: foodcritic run is skipped as Ruby #{RUBY_VERSION} is < 2.1.0"
+  critiques.each do |cookbook|
+    system "foodcritic -f any cookbooks/#{cookbook}"
   end
 end
 
 # comment
-desc "Runs knife cookbook test"
-task :knife do
-  sh "bundle exec knife cookbook test dcb_test -c test/chef/knife.rb -o cookbooks"
+desc "Runs knife cookbook test on cookbooks"
+task :knifetest do
+  pipeline.each do |cookbook|
+    system "bundle exec knife cookbook test #{cookbook} -c test/chef/knife.rb -o cookbooks"
+  end
 end
 
 # comment
-desc "Deploy to Chef server"
+desc "Deploy cookbooks to Chef server"
 task :deploy do
-  sh "bundle exec knife cookbook upload dcb_test -c test/chef/knife.rb -o cookbooks"
+  pipeline.each do |cookbook|
+    system "bundle exec knife cookbook upload #{cookbook} -c test/chef/knife.rb -o cookbooks"
+  end
 end
-
-# todo : figure out loops

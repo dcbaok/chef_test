@@ -21,7 +21,7 @@ rvm:
 
 script:
   - bundle exec rake foodcritic # run foodcritic linter
-  - bundle exec rake knife
+  - bundle exec rake knifetest
 
 # figure out how to clean this up
 after_success: 
