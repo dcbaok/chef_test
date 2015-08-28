@@ -23,6 +23,7 @@ before_script:
   - echo "operating on commit" $TRAVIS_COMMIT
 
 script:
+  - echo "operating on commit" $TRAVIS_COMMIT
   - bundle exec rake foodcritic # run foodcritic linter
   - bundle exec rake knifetest
 
