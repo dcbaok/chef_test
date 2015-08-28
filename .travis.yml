@@ -20,7 +20,7 @@ rvm:
   - 2.1.0
 
 before_script:
-  - echo "operating on commit $TRAVIS_COMMIT"
+  - echo "operating on commit" $TRAVIS_COMMIT
 
 script:
   - bundle exec rake foodcritic # run foodcritic linter
