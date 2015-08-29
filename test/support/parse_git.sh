@@ -9,5 +9,5 @@
 
 # Get the commit
 
-commit = $TRAVIS_COMMIT
-echo "Commit is $COMMIT"
+commit="$TRAVIS_COMMIT"
+echo "Commit is $commit"
