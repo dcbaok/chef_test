@@ -13,3 +13,8 @@
    action :nothing
   end
 end
+
+# install a package
+package 'whois' do
+  action :install
+end
