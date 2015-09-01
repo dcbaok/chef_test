@@ -3,6 +3,10 @@ new_cb CHANGELOG
 
 This file is used to list changes made in each version of the new_cb cookbook.
 
+0.1.1
+-----
+- [dcbaok] - bumped cb version
+
 0.1.0
 -----
 - [your_name] - Initial release of new_cb

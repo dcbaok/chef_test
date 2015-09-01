@@ -85,7 +85,7 @@ task :test_databags do
 desc "Run tests on databags changed in the current commit"
   puts "Running databag tests:"
   if databags == {}
-    puts "no databag deltas, skipping"
+    puts "   no databag deltas, skipping"
   end
   # run databag test
 end
@@ -94,7 +94,7 @@ desc "Run tests on environments changed in the current commit"
 task :test_environments do
   puts "Running environments tests:"
   if environments == {}
-    puts "no environments deltas, skipping"
+    puts "   no environments deltas, skipping"
   end
   # run environment test
 end
