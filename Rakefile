@@ -62,12 +62,6 @@ end
 
 
 ## Test
-desc "Run tests on changed cookbooks, databags, and environments"
-task :test_chef_repo_changes
-  Rake::Task['test_cookbooks'].execute
-  Rake::Task['test_databags'].execute
-  Rake::Task['test_environments'].execute
-end
 
 desc "Run tests on cookbooks changed in the current commit"
 task :test_cookbooks do
@@ -93,6 +87,13 @@ task :test_environment do
   # run environment test
 end
 
+
+desc "Run tests on changed cookbooks, databags, and environments"
+task :test_chef_repo_changes
+  Rake::Task['test_cookbooks'].execute
+  Rake::Task['test_databags'].execute
+  Rake::Task['test_environments'].execute
+end
 
 ## Deploy
 desc "Deploy changed cookbooks, databags, and environments"
