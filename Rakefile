@@ -68,21 +68,22 @@ task :test_cookbooks do
   # TODO: check if cookbook directory is present, maybe cb was deleted?
   puts "Running cookbook tests:"
   if cookbooks == {}
-    puts "no cookbook deltas, skipping"
+    puts "   no cookbook deltas, skipping"
   end
   cookbooks.keys.each do |cb|
     if critiques.include?(cb)
-      puts "  running cookbook tests on #{cb}"
+      puts "   running cookbook tests on #{cb}"
       sh "foodcritic -f any --tags ~FC015 cookbooks/#{cb}"
       sh "bundle exec knife cookbook test #{cb} -c test/chef/knife.rb -o cookbooks"
     else
-      puts "#{cb} not whitelisted for testing, skipping"
+      puts "   #{cb} not whitelisted for testing, skipping"
     end
   end
 end
 
 task :test_databags do
 desc "Run tests on databags changed in the current commit"
+  puts "Running databag tests:"
   if databags == {}
     puts "no databag deltas, skipping"
   end
@@ -90,7 +91,8 @@ desc "Run tests on databags changed in the current commit"
 end
 
 desc "Run tests on environments changed in the current commit"
-task :test_environment do
+task :test_environments do
+  puts "Running environments tests:"
   if environments == {}
     puts "no environments deltas, skipping"
   end
@@ -101,18 +103,12 @@ end
 desc "Run tests on changed cookbooks, databags, and environments"
 task :test_chef_repo_changes
   Rake::Task['test_cookbooks'].execute
-#  Rake::Task['test_databags'].execute
-#  Rake::Task['test_environments'].execute
+  Rake::Task['test_databags'].execute
+  Rake::Task['test_environments'].execute
 end
 
 
 ## Deploy
-desc "Deploy changed cookbooks, databags, and environments"
-task :deploy_chef_repo_changes do
-  Rake::Task['deploy_cookbooks'].execute
-  Rake::Task['deploy_databags'].execute
-  Rake::Task['deploy_environments'].execute
-end
 
 desc "Deploy cookbooks changed in the current commit to the Chef server"
 task :deploy_cookbooks do
@@ -135,6 +131,14 @@ end
 desc "Deploy environments changed in the current commit to the Chef server"
 task :deploy_environments do
   # run environment deploy
+end
+
+
+desc "Deploy changed cookbooks, databags, and environments"
+task :deploy_chef_repo_changes do
+  Rake::Task['deploy_cookbooks'].execute
+  Rake::Task['deploy_databags'].execute
+  Rake::Task['deploy_environments'].execute
 end
 
 
