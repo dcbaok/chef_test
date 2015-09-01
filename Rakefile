@@ -62,38 +62,48 @@ end
 
 
 ## Test
-
-desc "Run tests on cookbooks changed in the current commit"
-task :test_cookbooks do
-  # TODO: check if cookbook directory is present, maybe cb was deleted?
-  cookbooks.keys.each do |cb|
-    if critiques.include?(cb)
-      puts "Running cookbook tests on #{cb}"
-      sh "foodcritic -f any --tags ~FC015 cookbooks/#{cb}"
-      sh "bundle exec knife cookbook test #{cb} -c test/chef/knife.rb -o cookbooks"
-    else
-      puts "Skipping cookbook tests on #{cb}, not whitelisted for testing"
-    end
-  end
-end
-
-task :test_databags do
-desc "Run tests on databags changed in the current commit"
-  # run databag test
-end
-
-desc "Run tests on environments changed in the current commit"
-task :test_environment do
-  # run environment test
-end
-
-
 desc "Run tests on changed cookbooks, databags, and environments"
 task :test_chef_repo_changes
   Rake::Task['test_cookbooks'].execute
 #  Rake::Task['test_databags'].execute
 #  Rake::Task['test_environments'].execute
 end
+
+
+desc "Run tests on cookbooks changed in the current commit"
+task :test_cookbooks do
+  # TODO: check if cookbook directory is present, maybe cb was deleted?
+  puts "Running cookbook tests:"
+  if cookbooks == {}
+    puts "no cookbook deltas, skipping"
+  end
+  cookbooks.keys.each do |cb|
+    if critiques.include?(cb)
+      puts "  running cookbook tests on #{cb}"
+      sh "foodcritic -f any --tags ~FC015 cookbooks/#{cb}"
+      sh "bundle exec knife cookbook test #{cb} -c test/chef/knife.rb -o cookbooks"
+    else
+      puts "#{cb} not whitelisted for testing, skipping"
+    end
+  end
+end
+
+task :test_databags do
+desc "Run tests on databags changed in the current commit"
+  if databags == {}
+    puts "no databag deltas, skipping"
+  end
+  # run databag test
+end
+
+desc "Run tests on environments changed in the current commit"
+task :test_environment do
+  if environments == {}
+    puts "no environments deltas, skipping"
+  end
+  # run environment test
+end
+
 
 ## Deploy
 desc "Deploy changed cookbooks, databags, and environments"
