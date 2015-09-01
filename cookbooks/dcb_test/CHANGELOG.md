@@ -3,6 +3,10 @@ dcb_test CHANGELOG
 
 This file is used to list changes made in each version of the dcb_test cookbook.
 
+0.1.8
+-----
+- [dcbaok] - FC error introduced - will it fail the build with new Rakefile?
+
 0.1.7
 -----
 - [dcbaok] - bumped version

@@ -52,11 +52,11 @@ if git_log != []
 
   git_log.each do |item|
   if item =~ /^[AMD]\s+cookbooks\/([^\/]+)\//
-    cookbooks[$1] = 1
+    cookbooks[$1] = ""
   elsif item =~ /^[AMD]\s+databags\/(.*)$/
-    databags[$1] = 1
+    databags[$1] = ""
   elsif item =~ /^[AMD]\s+environments\/(.*)$/
-    environments[$1] = 1
+    environments[$1] = ""
   end
 end
 

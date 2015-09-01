@@ -1,7 +1,7 @@
-name             'dcb_test'
+name             'another_cb'
 maintainer       'YOUR_COMPANY_NAME'
-maintainer_email 'dcbaok@tensqft.net'
+maintainer_email 'YOUR_EMAIL'
 license          'All rights reserved'
-description      'Installs/Configures dcb_test'
+description      'Installs/Configures another_cb'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.1.8'
+version          '0.1.0'
