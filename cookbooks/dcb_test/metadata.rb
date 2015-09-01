@@ -1,5 +1,5 @@
 name             'dcb_test'
-maintainer       'YOUR_COMPANY_NAME'
+maintainer       'David B'
 maintainer_email 'dcbaok@tensqft.net'
 license          'All rights reserved'
 description      'Installs/Configures dcb_test'
