@@ -101,7 +101,7 @@ end
 
 
 desc "Run tests on changed cookbooks, databags, and environments"
-task :test_chef_repo_changes
+task :test_chef_repo_changes do
   Rake::Task['test_cookbooks'].execute
   Rake::Task['test_databags'].execute
   Rake::Task['test_environments'].execute
