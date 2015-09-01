@@ -24,7 +24,7 @@ end
 puts "Operating on commit '#{travis_commit}'"
 
 # Parse the commit header
-git log = `git show #{travis_commit} --name-status`.split(/\n/)
+git_log = `git show #{travis_commit} --name-status`.split(/\n/)
 commit = git_log.shift.split(/^commit /)[1]  # get commit hash (redundant but need shift anyway)
 if git_log[0] =~ /^Merge: /   # is it a merge? 
   merge = git_log.shift.split(/^Merge: /)[1].split  # merge gets an array of (2) merge commit #'s
