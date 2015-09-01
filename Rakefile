@@ -96,7 +96,7 @@ end
 
 ## Deploy
 desc "Deploy changed cookbooks, databags, and environments"
-task :deploy_chef_repo_changes
+task :deploy_chef_repo_changes do
   Rake::Task['deploy_cookbooks'].execute
   Rake::Task['deploy_databags'].execute
   Rake::Task['deploy_environments'].execute
