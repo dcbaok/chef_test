@@ -15,5 +15,5 @@ then
   echo "Placing org validator PEM"
   openssl aes-256-cbc -pass env:aes_key -in $CHEFDIR/chef_validator.pem.enc -out $CHEFDIR/$ORGNAME-validator.pem -d ;
 
-  bundle exec rake deploy_chef_repo_changes;
+  bundle exec rake deploy_chef_repo;
 fi

@@ -27,21 +27,21 @@ task :test_cookbooks do
   end
 end
 
-task :test_databags do
 desc "Run tests on databags" 
+task :test_databags do
   puts "--| Running databag tests:"
   # run databag tests
 end
 
-desc "Run tests on environments changed in the current commit"
+desc "Run tests on environments"
 task :test_environments do
   puts "--| Running environments tests:"
   # run environment tests
 end
 
 
-desc "Run tests on changed cookbooks, databags, and environments"
-task :test_chef_repo_changes do
+desc "Run tests on cookbooks, databags, and environments"
+task :test_chef_repo do
   Rake::Task['test_cookbooks'].execute
   Rake::Task['test_databags'].execute
   Rake::Task['test_environments'].execute
@@ -50,7 +50,7 @@ end
 
 ## Deploy
 
-desc "Deploy cookbooks changed in the current commit to the Chef server"
+desc "Deploy cookbooks to the Chef server"
 task :deploy_cookbooks do
   # TODO: check if cookbook directory is present, maybe cb was deleted?
   # TODO: check if cookbook version has been updated (and matches changelog?).
@@ -65,19 +65,19 @@ task :deploy_cookbooks do
   end
 end
 
-desc "Deploy databags changed in the current commit to the Chef server"
+desc "Deploy databags to the Chef server"
 task :deploy_databags do
   # run databag deploy
 end
 
-desc "Deploy environments changed in the current commit to the Chef server"
+desc "Deploy environments to the Chef server"
 task :deploy_environments do
   # run environment deploy
 end
 
 
 desc "Deploy changed cookbooks, databags, and environments"
-task :deploy_chef_repo_changes do
+task :deploy_chef_repo do
   Rake::Task['deploy_cookbooks'].execute
   Rake::Task['deploy_databags'].execute
   Rake::Task['deploy_environments'].execute
