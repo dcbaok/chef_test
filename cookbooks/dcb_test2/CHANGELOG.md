@@ -3,6 +3,10 @@ dcb_test2 CHANGELOG
 
 This file is used to list changes made in each version of the dcb_test2 cookbook.
 
+0.1.3
+-----
+- [dcbaok] - bumped version, deploy not working
+
 0.1.2
 -----
 - [dcbaok] - bumped version 
