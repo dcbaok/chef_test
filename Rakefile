@@ -1,35 +1,145 @@
 #!/opt/chefdk/embedded/bin/rake
 
-task default: 'foodcritic'
-
+# Whitelist of cookbooks to run tests against
 critiques = [
   "dcb_test",
   "dcb_test2",
   "dcb_test3"
 ]
 
+# Whitelist of cookbooks to deploy to Chef server
 pipeline = [
   "dcb_test",
   "dcb_test2",
   "dcb_test3"
 ]
 
-desc "Runs foodcritic linter on cookbooks"
+## Parse git log 
+
+# Get the commit Travis is working on, or the most recent commit
+travis_commit = ENV['TRAVIS_COMMIT']
+unless travis_commit
+  travis_commit = `git log --pretty=format:%H -1`
+end
+puts "Operating on commit '#{travis_commit}'"
+
+# Parse the commit header
+git log = `git show #{travis_commit} --name-status`.split(/\n/)
+commit = git_log.shift.split(/^commit /)[1]  # get commit hash (redundant but need shift anyway)
+if git_log[0] =~ /^Merge: /   # is it a merge? 
+  merge = git_log.shift.split(/^Merge: /)[1].split  # merge gets an array of (2) merge commit #'s
+else
+  merge = ""	# not a merge
+end
+author = git_log.shift.split(/^Author: /)[1]
+date = git_log.shift.split(/^Date:\s+/)[1]
+
+# Get commit message
+message = []
+if merge == ""
+  until git_log[0] =~ /^\w/
+    message.push(git_log.shift)
+  end
+else
+  message = git_log
+end
+
+# Parse the file list
+if git_log != []
+  cookbooks = {}
+  databags = {}
+  environments = {}
+
+  git_log.each do |item|
+  if item =~ /^[AMD]\s+cookbooks\/([^\/]+)\//
+    cookbooks[$1] = 1
+  elsif item =~ /^[AMD]\s+databags\/(.*)$/
+    databags[$1] = 1
+  elsif item =~ /^[AMD]\s+environments\/(.*)$/
+    environments[$1] = 1
+  end
+end
+
+
+## Test
+desc "Run tests on changed cookbooks, databags, and environments"
+task :test_chef_repo_changes
+  Rake::Task['test_cookbooks'].execute
+  Rake::Task['test_databags'].execute
+  Rake::Task['test_environments'].execute
+end
+
+desc "Run tests on cookbooks changed in the current commit"
+task :test_cookbooks do
+  # TODO: check if cookbook directory is present, maybe cb was deleted?
+  cookbooks.keys.each do |cb|
+    if critiques.include?(cb)
+      puts "Running cookbook tests on #{cb}"
+      sh "foodcritic -f any --tags ~FC015 cookbooks/#{cb}"
+      sh "bundle exec knife cookbook test #{cb} -c test/chef/knife.rb -o cookbooks"
+    else
+      puts "Skipping cookbook tests on #{cb}, not whitelisted for testing"
+    end
+  end
+end
+
+task :test_databags do
+desc "Run tests on databags changed in the current commit"
+  # run databag test
+end
+
+desc "Run tests on environments changed in the current commit"
+task :test_environment do
+  # run environment test
+end
+
+
+## Deploy
+desc "Deploy changed cookbooks, databags, and environments"
+task :deploy_chef_repo_changes
+  Rake::Task['deploy_cookbooks'].execute
+  Rake::Task['deploy_databags'].execute
+  Rake::Task['deploy_environments'].execute
+end
+
+desc "Deploy cookbooks changed in the current commit to the Chef server"
+task :deploy_cookbooks do
+  # TODO: check if cookbook directory is present, maybe cb was deleted?
+  # TODO: check if cookbook version has been updated (and matches changelog?).
+  # TODO: check if cookbook changelog has been updated (and matches version?).
+  cookbooks.keys.each do |cb|
+    if pipeline.include?(cb)
+      puts "Deploying #{cb} cookbook to Chef server."
+      system "bundle exec knife cookbook upload #{cookbook} -c test/chef/knife.rb -o cookbooks"
+    end
+  end
+end
+
+desc "Deploy databags changed in the current commit to the Chef server"
+task :deploy_databags do
+  # run databag deploy
+end
+
+desc "Deploy environments changed in the current commit to the Chef server"
+task :deploy_environments do
+  # run environment deploy
+end
+
+
+## Legacy
+
+desc "Run foodcritic linter on all cookbooks"
 task :foodcritic do
   critiques.each do |cookbook|
     sh "foodcritic -f any cookbooks/#{cookbook}" 
   end
 end
-
-# comment
-desc "Runs knife cookbook test on cookbooks"
+desc "Run knife cookbook test on all cookbooks"
 task :knifetest do
   pipeline.each do |cookbook|
     system "bundle exec knife cookbook test #{cookbook} -c test/chef/knife.rb -o cookbooks"
   end
 end
-
-# comment
 desc "Deploy cookbooks to Chef server"
 task :deploy do
   pipeline.each do |cookbook|

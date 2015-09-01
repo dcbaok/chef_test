@@ -19,12 +19,8 @@ env:
 rvm:
   - 2.1.0
 
-before_script:
-  - bash test/support/parse_git.sh
-
 script:
-  - bundle exec rake foodcritic # run foodcritic linter
-  - bundle exec rake knifetest
+  - bundle exec rake test_chef_repo_changes
 
 # figure out how to clean this up
 after_success: 
