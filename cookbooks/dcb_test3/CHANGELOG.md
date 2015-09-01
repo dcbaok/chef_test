@@ -3,6 +3,10 @@ dcb_test3 CHANGELOG
 
 This file is used to list changes made in each version of the dcb_test3 cookbook.
 
+0.1.1
+-----
+- [dcbaok] - update version
+
 0.1.0
 -----
 - [your_name] - Initial release of dcb_test3

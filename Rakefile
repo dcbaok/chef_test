@@ -66,17 +66,17 @@ end
 desc "Run tests on cookbooks changed in the current commit"
 task :test_cookbooks do
   # TODO: check if cookbook directory is present, maybe cb was deleted?
-  puts "Running cookbook tests:"
+  puts "--| Running cookbook tests:"
   if cookbooks == {}
-    puts "   no cookbook deltas, skipping"
+    puts "--|   no cookbook deltas, skipping"
   end
   cookbooks.keys.each do |cb|
     if critiques.include?(cb)
-      puts "   running cookbook tests on #{cb}"
+      puts "--|   running cookbook tests on #{cb}"
       sh "foodcritic -f any --tags ~FC015 cookbooks/#{cb}"
       sh "bundle exec knife cookbook test #{cb} -c test/chef/knife.rb -o cookbooks"
     else
-      puts "   #{cb} not whitelisted for testing, skipping"
+      puts "--|   #{cb} not whitelisted for testing, skipping"
     end
   end
 end
@@ -85,16 +85,16 @@ task :test_databags do
 desc "Run tests on databags changed in the current commit"
   puts "Running databag tests:"
   if databags == {}
-    puts "   no databag deltas, skipping"
+    puts "--|   no databag deltas, skipping"
   end
   # run databag test
 end
 
 desc "Run tests on environments changed in the current commit"
 task :test_environments do
-  puts "Running environments tests:"
+  puts "--| Running environments tests:"
   if environments == {}
-    puts "   no environments deltas, skipping"
+    puts "--|   no environments deltas, skipping"
   end
   # run environment test
 end
@@ -115,9 +115,11 @@ task :deploy_cookbooks do
   # TODO: check if cookbook directory is present, maybe cb was deleted?
   # TODO: check if cookbook version has been updated (and matches changelog?).
   # TODO: check if cookbook changelog has been updated (and matches version?).
+  # TODO: if cookbook hasn't changed in git, but is newly added to the pipeline, it won't deploy
+  #		- handle this by diffing the rakefile...
   cookbooks.keys.each do |cb|
     if pipeline.include?(cb)
-      puts "Deploying #{cb} cookbook to Chef server."
+      puts "--| Deploying #{cb} cookbook to Chef server."
       system "bundle exec knife cookbook upload #{cookbook} -c test/chef/knife.rb -o cookbooks"
     end
   end
